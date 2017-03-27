@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="loginbutton">Prisijungti</string>
+
+    <string name="pavadinimas">Pavadinimas: </string>
+
+    <string name="rusis">Rūšis: </string>
+    <string name="rusis_Vistienos">Vištienos kepsnys</string>
+    <string name="rusis_Jautienos">Jautienos kepsnys</string>
+    <string name="rusis_Kiaulienos">Kiaulienos kepsnys</string>
+
+    <string name="kiekis">Kiekis: </string>
+
+    <string name="garnyrai">Garnyras: </string>
+    <string name="garnyrai_Bulves">Gruzdintos bulvės su rozmarinais</string>
+    <string name="garnyrai_Morkos">Morkų traškučiai</string>
+    <string name="garnyrai_Dzarzoves">Daržovės</string>
+
+    <string name="padazas">Padažas: </string>
+    <string name="padazas_Astrus">Aštrusis</string>
+    <string name="padazas_Jogurtinis">Jogurtinis padažas su itališkais prieskoniais</string>
+    <string name="padazas_Grietineles">Grietinėlės ir brendžio</string>
+
 </resources>

@@ -19,7 +19,7 @@
         <activity android:name=".LoggedActivity" />
         <activity android:name=".NewPost" />
         <activity android:name=".Search" />
-        <activity android:name=".Signup"></activity>
+        <activity android:name=".Signup" />
     </application>
 
 </manifest>
