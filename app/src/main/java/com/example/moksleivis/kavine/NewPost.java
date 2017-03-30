@@ -57,14 +57,14 @@ public class NewPost extends LoggedActivity {
                 padazas[0] = (RadioButton) findViewById(selectedId);
 
                StringBuffer garnyrai = new StringBuffer();
-                garnyrai.append("Gruzdintos bulvės su rozmarinais")
-                        .append(garnyraiBulves.isChecked());
+                garnyrai.append(getResources().getString(R.string.garnyrai_Bulves) + ": ")
+                        .append(garnyraiBulves.isChecked() + "\n");
 
-                garnyrai.append("Morkų traškučiai")
-                        .append(garnyraiMorkos.isChecked());
+                garnyrai.append(getResources().getString(R.string.garnyrai_Morkos) + ": ")
+                        .append(garnyraiMorkos.isChecked() + "\n");
 
-                garnyrai.append("Daržovės")
-                        .append(garnyraiDarzoves.isChecked());
+                garnyrai.append(getResources().getString(R.string.garnyrai_Darzoves) + ": ")
+                        .append(garnyraiDarzoves.isChecked() +"\n");
 
                 Toast.makeText(NewPost.this,
                         pavadinimas.getText() + "\n" +
