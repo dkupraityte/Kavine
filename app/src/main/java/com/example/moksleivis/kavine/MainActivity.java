@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private String username;
     private String password;
 
-
+//jj
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
