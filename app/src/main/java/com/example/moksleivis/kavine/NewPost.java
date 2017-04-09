@@ -100,30 +100,30 @@ public class NewPost extends LoggedActivity {
                 garnyrai.append(getResources().getString(R.string.garnyrai_Darzoves) + ": ")
                         .append(garnyraiDarzoves.isChecked() + "\n");
 
-                Toast.makeText(NewPost.this,
-                        mPavadinimasView.getText() + "\n" +
-                                String.valueOf(rusys.getSelectedItem()) + "\n" +
-                                mKiekisView.getText() + "\n" +
-                                garnyrai.toString() +
-                                padazas[0].getText(), Toast.LENGTH_SHORT).show();
 
                 if (cancel) {
                     focusView.requestFocus();
-                    Patiekalas patiekalas;
                 }
 
                 else {
                     Intent intent = new Intent(NewPost.this, NewPost.class);
                     startActivity(intent);
 
-                    Toast.makeText(NewPost.this, pavadinimas + "" + kiekis,
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewPost.this,
+                            mPavadinimasView.getText() + "\n" +
+                                    String.valueOf(rusys.getSelectedItem()) + "\n" +
+                                    mKiekisView.getText() + "\n" +
+                                    garnyrai.toString() +
+                                    padazas[0].getText(), Toast.LENGTH_SHORT).show();
+
+                    /*Toast.makeText(NewPost.this, pavadinimas + "" + kiekis,
+                            Toast.LENGTH_SHORT).show();*/
                 }
     }
         });
 }
     private boolean isValid(String credentials) {
-        final String CREDENTIALS_PATTERN = "^([A-Za-z0-9]{3,15})+$";
+        final String CREDENTIALS_PATTERN = "^([A-Za-z0-9]{1,15})+$";
         Pattern pattern = Pattern.compile(CREDENTIALS_PATTERN);
 
         Matcher matcher = pattern.matcher(credentials);

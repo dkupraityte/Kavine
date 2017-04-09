@@ -6,22 +6,21 @@
 
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="REGISTRACIJA" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/regusr"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="300px"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Vartotojo vardas"
-        android:layout_marginTop="300px"/>
+        android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/regmail"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -29,7 +28,7 @@
         android:inputType="textEmailAddress"/>
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/regpass"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Slaptažodis"
@@ -37,7 +36,7 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/regbtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Registruotis"
