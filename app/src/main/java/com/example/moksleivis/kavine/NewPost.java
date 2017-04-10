@@ -91,14 +91,15 @@ public class NewPost extends LoggedActivity {
                 padazas[0] = (RadioButton) findViewById(selectedId);
 
                 StringBuffer garnyrai = new StringBuffer();
-                garnyrai.append(getResources().getString(R.string.garnyrai_Bulves) + ": ")
-                        .append(garnyraiBulves.isChecked() + "\n");
-
-                garnyrai.append(getResources().getString(R.string.garnyrai_Morkos) + ": ")
-                        .append(garnyraiMorkos.isChecked() + "\n");
-
-                garnyrai.append(getResources().getString(R.string.garnyrai_Darzoves) + ": ")
-                        .append(garnyraiDarzoves.isChecked() + "\n");
+                if (garnyraiBulves.isChecked()) {
+                    garnyrai.append(getResources().getString(R.string.garnyrai_Bulves) + ",");
+                }
+                if (garnyraiMorkos.isChecked()) {
+                    garnyrai.append(getResources().getString(R.string.garnyrai_Morkos) + ",");
+                }
+                if (garnyraiDarzoves.isChecked()) {
+                    garnyrai.append(getResources().getString(R.string.garnyrai_Darzoves));
+                }
 
 
                 if (cancel) {
@@ -106,18 +107,34 @@ public class NewPost extends LoggedActivity {
                 }
 
                 else {
+
+                    int kiekis_num = Integer.parseInt(kiekis);
+
+                    Patiekalas food = new Patiekalas(pavadinimas, String.valueOf(rusys.getSelectedItem()), kiekis_num,
+                            garnyrai.toString(), padazas[0].getText().toString());
+
+
                     Intent intent = new Intent(NewPost.this, NewPost.class);
                     startActivity(intent);
 
-                    Toast.makeText(NewPost.this,
+                   /* Toast.makeText(NewPost.this,
                             mPavadinimasView.getText() + "\n" +
                                     String.valueOf(rusys.getSelectedItem()) + "\n" +
                                     mKiekisView.getText() + "\n" +
                                     garnyrai.toString() +
-                                    padazas[0].getText(), Toast.LENGTH_SHORT).show();
+                                    padazas[0].getText(), Toast.LENGTH_SHORT).show();*/
 
                     /*Toast.makeText(NewPost.this, pavadinimas + "" + kiekis,
                             Toast.LENGTH_SHORT).show();*/
+
+
+                    Toast.makeText(NewPost.this,
+                            food.getPavadinimas() +"\n" +
+                            food.getRusis() + "\n" +
+                            food.getKiekis() + "\n" +
+                            food.getGarnyras() + "\n" +
+                            food.getPadazas() + "\n", Toast.LENGTH_LONG).show();
+
                 }
     }
         });

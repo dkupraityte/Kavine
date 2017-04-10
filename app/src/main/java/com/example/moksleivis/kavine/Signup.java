@@ -31,7 +31,7 @@ public class Signup extends AppCompatActivity {
 
     public void reg1() {
 
-
+        registr1 = (Button) findViewById(R.id.regbtn);
         regUsername = (EditText) findViewById(R.id.regusr);
         regPassword = (EditText) findViewById(R.id.regpass);
         regEmail = (EditText) findViewById(R.id.regmail);
@@ -65,7 +65,7 @@ public class Signup extends AppCompatActivity {
             focusView = regPassword;
             cancel = true;
         }
-        if (!isValid(email)) {
+        if (!isEmailValid(email)) {
             regEmail.setError("Neteisingai įvestas e-paštas");
             focusView = regEmail;
             cancel = true;
@@ -76,6 +76,13 @@ public class Signup extends AppCompatActivity {
         } else {
             Intent intent = new Intent(Signup.this, MainActivity.class);
             Signup.this.startActivity(intent);
+
+            Vartotojas user = new Vartotojas(username, email, password);
+
+            Toast.makeText(Signup.this,
+                    user.getVardas() + "\n" +
+                    user.getSlaptazodis() + "\n" +
+                    user.getEpastas() + "\n", Toast.LENGTH_LONG).show();
         }
             }
 

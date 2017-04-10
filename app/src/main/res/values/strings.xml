@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Kavinė</string>
     <string name="loginbutton">Prisijungti</string>
 
     <string name="pavadinimas">Pavadinimas: </string>
