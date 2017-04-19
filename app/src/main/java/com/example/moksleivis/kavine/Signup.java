@@ -61,7 +61,7 @@ public class Signup extends AppCompatActivity {
         View focusView = null;
 
         /*Toast.makeText(Signup.this, username + "" + password + "" + email,
-                Toast.LENGTH_SHORT).show();*/
+                Toast.LENGTH_SHORT).show();*////
 
         if (!isValid(username)) {
             regUsername.setError("Neteisingai įvestas vardas");
