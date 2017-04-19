@@ -1,7 +1,9 @@
 package com.example.moksleivis.kavine;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.Signature;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +12,16 @@ import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Signup extends AppCompatActivity {
+
+    private static final String REGISTER_URL = "http://deimkup.byethost11.com/mobile/register.php";
 
     Button registr1;
     private EditText regUsername;
@@ -79,10 +87,14 @@ public class Signup extends AppCompatActivity {
 
             Vartotojas user = new Vartotojas(username, email, password);
 
-            Toast.makeText(Signup.this,
+           /* Toast.makeText(Signup.this,
                     user.getVardas() + "\n" +
                     user.getSlaptazodis() + "\n" +
-                    user.getEpastas() + "\n", Toast.LENGTH_LONG).show();
+                    user.getEpastas() + "\n", Toast.LENGTH_LONG).show();*/
+
+           registerUser(user.getVardas(), user.getSlaptazodis(), user.getEpastas());
+
+
         }
             }
 
@@ -115,6 +127,59 @@ public class Signup extends AppCompatActivity {
         else
             return false;
     }
+
+
+    private void registerUser(String username, String password, String email) {
+        String urlSuffix = "?username="+username+"&password="+password+"&email="+email;
+        class RegisterUser extends AsyncTask<String, Void, String> {
+
+            ProgressDialog loading;
+
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(Signup.this, "Prašome palaukti",null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String s = params[0];
+                BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(REGISTER_URL+s);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                    // byethost naudoja antibot sistema, todel reikia kiekvienam rankutėmis suvesti cookie turinį,
+                    // kuris pas kiekviena bus skirtingas. kaip tai padaryti zemiau nuoroda
+                    // http://stackoverflow.com/questions/31912000/byethost-server-passing-html-values-checking-your-browser-with-json-string
+                    con.setRequestProperty("Cookie", "__test=7a4d917e220fbf9a55cab3046bd1a3b7; expires=2038 m. sausio 1 d., penktadienis 01:55:55; path=/");
+                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                    String result;
+
+                    result = bufferedReader.readLine();
+
+                    return result;
+                }catch(Exception e){
+                    return null;
+                }
+            }
+        }
+
+        RegisterUser ru = new RegisterUser();
+        ru.execute(urlSuffix);
+    }
+
+
+
 
 }
 
