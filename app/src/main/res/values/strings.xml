@@ -21,4 +21,10 @@
     <string name="padazas_Jogurtinis">Jogurtinis padažas su itališkais prieskoniais</string>
     <string name="padazas_Grietineles">Grietinėlės ir brendžio</string>
 
+    <string name="rusys">Rūšis</string>
+    <string-array name="rusys2">
+        <item>Vištienos kepsnys</item>
+        <item>Jautienos kepsnys</item>
+        <item>Kiaulienos kepsnys</item>
+    </string-array>
 </resources>

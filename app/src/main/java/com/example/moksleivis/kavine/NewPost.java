@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 public class NewPost extends LoggedActivity {
 
 
-
+    private Spinner rusys;
     private EditText mPavadinimasView;
     private EditText mKiekisView;
 
@@ -36,6 +36,8 @@ public class NewPost extends LoggedActivity {
 
         mPavadinimasView = (EditText) findViewById(R.id.pavadinimasText);
         mKiekisView = (EditText) findViewById(R.id.kiekisText);
+        rusys = (Spinner) findViewById(R.id.rusysSelect);
+
 
         Button saugoti = (Button) findViewById(R.id.submitButton);
         saugoti.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +69,7 @@ public class NewPost extends LoggedActivity {
                     focusView = mKiekisView;
                     cancel = true;
                 }
-                final Spinner rusys = (Spinner) findViewById(R.id.rusysSelect);
+                /*final Spinner rusys = (Spinner) findViewById(R.id.rusysSelect);
                 List<String> list = new ArrayList<String>();
                 list.add("Vištienos kepsnys");
                 list.add("Jautienos kepsnys");
@@ -75,7 +77,7 @@ public class NewPost extends LoggedActivity {
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(NewPost.this,
                         android.R.layout.simple_spinner_dropdown_item, list);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                rusys.setAdapter(dataAdapter);
+                rusys.setAdapter(dataAdapter);*/
 
 
                 //final EditText kiekis = (EditText) findViewById(R.id.kiekisText);
