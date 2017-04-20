@@ -1,6 +1,8 @@
 package com.example.moksleivis.kavine;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,13 +17,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NewPost extends LoggedActivity {
 
-
+    private static final String REGISTER_URL = "http://deimkup.byethost11.com/mobile/newEntry.php";
     private Spinner rusys;
     private EditText mPavadinimasView;
     private EditText mKiekisView;
@@ -116,6 +119,8 @@ public class NewPost extends LoggedActivity {
                             garnyrai.toString(), padazas[0].getText().toString());
 
 
+                    register(food.getPavadinimas(), food.getRusis(), food.getKiekis(), food.getGarnyras(), food.getPadazas());
+
                     Intent intent = new Intent(NewPost.this, NewPost.class);
                     startActivity(intent);
 
@@ -147,6 +152,44 @@ public class NewPost extends LoggedActivity {
 
         Matcher matcher = pattern.matcher(credentials);
         return matcher.matches();
+    }
+    private void register(String pavadinimas, String rusis, int kiekis, String garnyras, String padazas) {
+        class NewEntry extends AsyncTask<String, Void, String> {
+            ProgressDialog loading;
+            DB database = new DB();
+
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(NewPost.this, "Please Wait",null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                //raktas 1string, reiksme 2string
+                HashMap<String, String> data = new HashMap<String,String>();
+                data.put("pavadinimas",params[0]);
+                data.put("rusis",params[1]);
+                data.put("kiekis",params[2]);
+                data.put("garnyras",params[3]);
+                data.put("padazas",params[4]);
+                String result = database.sendPostRequest(REGISTER_URL,data);
+
+
+                return  result;
+            }
+        }
+
+        NewEntry ru = new NewEntry();
+        ru.execute(pavadinimas,rusis,String.valueOf(kiekis),garnyras,padazas);
     }
 }
 
