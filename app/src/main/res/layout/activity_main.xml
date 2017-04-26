@@ -27,6 +27,11 @@
         android:layout_height="wrap_content"
         android:hint="Slaptažodis"
         android:inputType="textPassword" />
+    <CheckBox
+        android:id="@+id/remember_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Prisiminti mane"/>
 
     <Button
         android:id="@+id/btn"

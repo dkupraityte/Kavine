@@ -7,7 +7,9 @@ import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.ViewStubCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -20,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private String username;
     private String password;
 
-//jj
+    private CheckBox rememberMeCheckBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,19 @@ public class MainActivity extends AppCompatActivity {
 
         mUsernameView = (EditText) findViewById(R.id.usr);
         mPasswordView = (EditText) findViewById(R.id.psd);
+        rememberMeCheckBox = (CheckBox) findViewById(R.id.remember_me);
+
+        final Vartotojas user = new Vartotojas(getApplicationContext());
+        rememberMeCheckBox.setChecked(user.isRemembered());
+
+        if(user.isRemembered()) {
+            mUsernameView.setText(user.getVardas(), TextView.BufferType.EDITABLE);
+            mPasswordView.setText(user.getSlaptazodis(), TextView.BufferType.EDITABLE);
+        }
+        else{
+            mUsernameView.setText("", TextView.BufferType.EDITABLE);
+            mPasswordView.setText("", TextView.BufferType.EDITABLE);
+        }
 
         mUsernameView.setError(null);
         mPasswordView.setError(null);
@@ -36,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
         mygtPrisijungti.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View arg0) {
-                  veikla();
+                  veikla(user);
               }
     });
     }
 
-    public void veikla() {
+    public void veikla(final Vartotojas user) {
         username = mUsernameView.getText().toString();
         password = mPasswordView.getText().toString();
 
@@ -49,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        Toast.makeText(MainActivity.this, username + "" + password,
+        Toast.makeText(MainActivity.this, username,
                 Toast.LENGTH_SHORT).show();
 
         if (!isValid(username)) {
@@ -66,6 +82,16 @@ public class MainActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
+            if(rememberMeCheckBox.isChecked()){
+                user.setVardas(username);
+                user.setSlaptazodis(password);
+                user.setRemembered(true);
+            }
+            else{
+                user.setVardas("");
+                user.setSlaptazodis("");
+                user.setRemembered(false);
+            }
             Intent intent = new Intent(MainActivity.this, LoggedActivity.class);
             startActivity(intent);
         }
